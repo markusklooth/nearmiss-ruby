@@ -1,8 +1,17 @@
-require_relative "nearmiss/configurable"
-require_relative "nearmiss/response"
-require_relative "nearmiss/client"
-require_relative "nearmiss/default"
-require_relative "nearmiss/util"
+require "set"
+require "faraday"
+require "sawyer"
+
+require "nearmiss-ruby/response"
+require "nearmiss-ruby/error"
+require "nearmiss-ruby/raise_error"
+require "nearmiss-ruby/version"
+
+require "nearmiss-ruby/configurable"
+require "nearmiss-ruby/response"
+require "nearmiss-ruby/client"
+require "nearmiss-ruby/default"
+require "nearmiss-ruby/util"
 
 module Nearmiss
 

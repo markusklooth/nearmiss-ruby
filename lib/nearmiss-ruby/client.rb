@@ -1,3 +1,4 @@
+# require "set"
 require_relative "authentication"
 require_relative "configurable"
 require_relative "arguments"
@@ -265,7 +266,7 @@ module Nearmiss
       opts = {
         :links_parser => Sawyer::LinkParsers::Simple.new
       }
-      conn_opts = @connection_options
+      conn_opts           = @connection_options
       conn_opts[:builder] = @middleware if @middleware
       conn_opts[:proxy]   = @proxy if @proxy
       opts[:faraday]      = Faraday.new(conn_opts)

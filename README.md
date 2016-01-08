@@ -182,6 +182,24 @@ If you need help installing or using the library, please contact Nearmiss Suppor
 
 If you've instead found a bug in the library or would like new features added, go ahead and open issues or pull requests against this repo!
 
+## Development
+
+From the terminal call:
+``` unix
+make install
+```
+
+To build the gem, call the following from the terminal:
+``` unix
+gem build nearmiss-ruby.gemspec
+```
+To update to the RubyGem server, call:
+``` unix
+make deploy
+```
+
+
+
 ## More Information
 
 There are more detailed examples in the included [examples][examples]

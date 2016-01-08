@@ -1,16 +1,13 @@
 # require "bim360/version" unless defined?(Nearmiss::VERSION)
 # require 'bim360/response/raise_error'
 
-require_relative 'raise_error'
-require_relative 'version'
-
 module Nearmiss
 
 
   # Default configuration options for {Client}
   module Default
 
-    config = YAML.load_file(File.join(Rails.root, 'secrets/secrets.yml'))['nearmiss']
+    # config = YAML.load_file(File.join(Rails.root, 'secrets/secrets.yml'))['nearmiss']
 
     # Default API endpoint
     API_ENDPOINT  = "http://nearmissapp.com".freeze
@@ -55,6 +52,9 @@ module Nearmiss
       end
 
 
+      def config
+        @config ||= {}
+      end
 
       # Default API endpoint from ENV or {API_ENDPOINT}
       # @return [String]

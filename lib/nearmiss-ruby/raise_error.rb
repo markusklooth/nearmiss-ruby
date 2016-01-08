@@ -1,6 +1,3 @@
-require 'faraday'
-require_relative 'response'
-require_relative 'error'
 
 module Nearmiss
   # Faraday response middleware
