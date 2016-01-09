@@ -4,6 +4,8 @@ require_relative "configurable"
 require_relative "arguments"
 require_relative "util"
 require_relative 'rate_limit'
+require_relative 'project'
+require_relative 'incident'
 
 require_relative 'client/account'
 require_relative 'client/bookmarks'
@@ -13,6 +15,9 @@ require_relative 'client/notifications'
 require_relative 'client/projects'
 require_relative 'client/rate_limit'
 require_relative 'client/users'
+require_relative 'client/companies'
+require_relative 'client/attachments'
+
 
 module Nearmiss
 
@@ -29,6 +34,8 @@ module Nearmiss
     include Nearmiss::Client::Projects
     include Nearmiss::Client::RateLimit
     include Nearmiss::Client::Users
+    include Nearmiss::Client::Companies
+    include Nearmiss::Client::Attachments
 
     # include Nearmiss::Client::Users
     # include Nearmiss::Client::ProjectLibrary

@@ -11,9 +11,9 @@ module Nearmiss
       #
       def incidents(options = {})
         since = options[:since] || options["since"]
-        
+
         options.merge!(since: iso8601(parse_date(since))) if since
-        
+
         paginate "incidents", options
       end
       alias :list_incidents :incidents
@@ -31,6 +31,18 @@ module Nearmiss
       end
       alias :nearmiss :incident
 
+      # Project incidents
+      #
+      # @param project [String] ID of project
+      # @return [Sawyer::Resource] Incident information
+      #
+      def project_incidents(project, options = {})
+
+        paginate "#{Project.new(project).path}/incidents", options
+
+      end
+
+
       # Create an incident
       #
       # @param options [Hash] Incident information.
@@ -41,7 +53,7 @@ module Nearmiss
       # @option options [String] :company Which company did the incident
       # @option options [String] :date When did the nearmiss occur
       # @option options [String] :trade e.g. is actually the activity
-      # @option options [Boolean] :is_public Submit the nearmiss publically or private 
+      # @option options [Boolean] :is_public Submit the nearmiss publically or private
       #
       # @option options [String] :bad_weather "rainy", "sunny", "cloudy", "windy"
       # @option options [String] :injured Answers: "yes", "no"

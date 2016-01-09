@@ -184,18 +184,20 @@ If you've instead found a bug in the library or would like new features added, g
 
 ## Development
 
-From the terminal call:
+If you want to hack on Nearmiss locally, we try to make bootstrapping the project as painless as possible. To start hacking, clone and run:
+
+To get started call
 ``` unix
-make install
+./script/bootstrap
 ```
 
 To build the gem, call the following from the terminal:
 ``` unix
-gem build nearmiss-ruby.gemspec
+./script/package
 ```
-To update to the RubyGem server, call:
+To push new version to RubyGem and create a git version tag:
 ``` unix
-make deploy
+./script/release
 ```
 
 
