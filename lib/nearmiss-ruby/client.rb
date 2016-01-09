@@ -1,22 +1,22 @@
 # require "set"
-require_relative "authentication"
-require_relative "configurable"
-require_relative "arguments"
-require_relative "util"
-require_relative 'rate_limit'
-require_relative 'project'
-require_relative 'incident'
+require "nearmiss-ruby/authentication"
+require "nearmiss-ruby/configurable"
+require "nearmiss-ruby/arguments"
+require "nearmiss-ruby/util"
+require "nearmiss-ruby/rate_limit"
+require "nearmiss-ruby/project"
+require "nearmiss-ruby/incident"
 
-require_relative 'client/account'
-require_relative 'client/bookmarks'
-require_relative 'client/categories'
-require_relative 'client/incidents'
-require_relative 'client/notifications'
-require_relative 'client/projects'
-require_relative 'client/rate_limit'
-require_relative 'client/users'
-require_relative 'client/companies'
-require_relative 'client/attachments'
+require "nearmiss-ruby/client/account"
+require "nearmiss-ruby/client/bookmarks"
+require "nearmiss-ruby/client/categories"
+require "nearmiss-ruby/client/incidents"
+require "nearmiss-ruby/client/notifications"
+require "nearmiss-ruby/client/projects"
+require "nearmiss-ruby/client/rate_limit"
+require "nearmiss-ruby/client/users"
+require "nearmiss-ruby/client/companies"
+require "nearmiss-ruby/client/attachments"
 
 
 module Nearmiss
