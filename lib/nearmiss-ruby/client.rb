@@ -235,7 +235,7 @@ module Nearmiss
 
     # Make a HTTP Request
     #
-    # @param method [Symbol] Http method
+    # @param method [Symbol] Http method e.g. :get, :post, :delete
     # @param path [String] path relative to {#api_endpoint}
     # @param options [Hash] Query and header params for request
     # @return [Sawyer::Resource]
@@ -259,19 +259,72 @@ module Nearmiss
         })
       end
 
+      url = URI::Parser.new.escape(path.to_s)
+      begin
+        @last_response = response = agent.call(method, url, data, options)
+        update_headers(response.headers)
+        response.data
+      rescue Faraday::ConnectionFailed => e
+        @last_response = nil
+        raise Nearmiss::ServerError.new
+      end
+    end
 
-      @last_response = response = agent.call(method, URI::Parser.new.escape(path.to_s), data, options)
+    def process_request(method, url, data = nil, options = nil)
 
-      update_headers(response.headers)
+      if [:get, :head].include?(method)
+        options ||= data
+        data      = nil
+      end
 
-      response.data
+      options ||= {}
+
+      res = connection.send method, url do |req|
+        if data
+          req.body = data.is_a?(String) ? data : encode_body(data)
+        end
+        if params = options[:query]
+          req.params.update params
+        end
+        if headers = options[:headers]
+          req.headers.update headers
+        end
+        started = Time.now
+      end
+      
+
 
     end
 
+    def connection
+      @connection ||= begin
+        conn_opts           = @connection_options
+        conn_opts[:builder] = @middleware if @middleware
+        conn_opts[:proxy]   = @proxy if @proxy
+        Faraday.new(conn_opts)
+      end
+    end
+
+    def serializer
+      @serializer ||= MultiJson
+    end
+
+    def encode_body(data)
+      serializer.encode(data)
+    end
+
+    # Decodes a String response body to a resource.
+    #
+    # str - The String body from the response.
+    #
+    # Returns an Object resource (Hash by default).
+    def decode_body(str)
+      serializer.decode(str)
+    end
 
     def sawyer_options
       opts = {
-        :links_parser => Sawyer::LinkParsers::Simple.new
+        # :links_parser => Sawyer::LinkParsers::Simple.new
       }
       conn_opts           = @connection_options
       conn_opts[:builder] = @middleware if @middleware

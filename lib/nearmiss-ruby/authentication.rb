@@ -6,7 +6,7 @@ module Nearmiss
     # Indicates if the client was supplied  Basic Auth
     # username and password
     #
-    # @see 
+    # @see
     # @return [Boolean]
     def basic_authenticated?
       !!(@email && @password)
@@ -15,7 +15,7 @@ module Nearmiss
     # Indicates if the client was supplied an OAuth
     # access token
     #
-    # @see 
+    # @see
     # @return [Boolean]
     def token_authenticated?
       !!@access_token
@@ -24,13 +24,14 @@ module Nearmiss
     def sign_in
 
       response  = post 'auth/sign_in', { email: @email, password: @password}
-      update_headers(last_response.headers)
+      update_headers(last_response && last_response.headers)
       reset_agent
-      @me       = response[:data]
+      @me       = response && response[:data] #&& response[:data]
     end
     alias :login :sign_in
 
     def update_headers(headers)
+      headers ||= {}
       # puts "update"
       # last_response.headers
       @client_id    = headers["client"]
